@@ -135,9 +135,9 @@ class ReconAutomation {
 
     val columnsValue = columns.map(x => "'" + x + "', " + x)
     val stackCols = columnsValue.mkString(",")
-    val newDF = df.selectExpr(pivotCol, "stack(" + columns.size + "," + stackCols + ")")
+    val df_1 = df.selectExpr(pivotCol, "stack(" + columns.size + "," + stackCols + ")")
       .select(pivotCol, "col0", "col1")
-    val transposeDF = newDF.groupBy(col("col0")).pivot(pivotCol)
+    val transposeDF = df_1.groupBy(col("col0")).pivot(pivotCol)
       .agg(concat_ws("", collect_list(col("col1"))))
       .withColumnRenamed("col0", pivotCol)
     transposeDF
