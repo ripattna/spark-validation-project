@@ -50,7 +50,6 @@ class ReconAutomation {
    * @return  DataFrame
    */
   def calculateTotalRecordCount(sourceDF: DataFrame, targetDF: DataFrame, alias: String): DataFrame = {
-
     try {
       // Make sure that column name and column count are same
       if (!sourceDF.columns.sameElements(targetDF.columns))
@@ -63,7 +62,6 @@ class ReconAutomation {
         System.exit(0)
       // case e: AnalysisException => println(e)
     }
-
     try{
       sourceDF.agg(count("*").as(alias))
         .withColumn("Column_Name", monotonically_increasing_id())
