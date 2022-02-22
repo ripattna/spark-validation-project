@@ -63,8 +63,12 @@ class ReconAutomation {
         System.exit(0)
       // case e: AnalysisException => println(e)
     }
-    try{
+    try {
       sourceDF.agg(count("*").as(alias))
+        .withColumn("Column_Name", monotonically_increasing_id())
+    }
+    catch {
+      case ex: Exception => sourceDF.agg(count("*").as(alias))
         .withColumn("Column_Name", monotonically_increasing_id())
     }
   }
