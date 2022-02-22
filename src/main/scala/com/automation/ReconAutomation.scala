@@ -55,14 +55,13 @@ class ReconAutomation {
       // Make sure that column name and column count are same
       if (!sourceDF.columns.sameElements(targetDF.columns))
       {
-        println("Column names and count were different in source and target!")
-        throw new Exception("Column count or column name didn't match!")
+        throw new Exception("Column count or column name did not match!")
       }
     }
     catch {
-      case ex: Exception => println(s"Found a unknown exception: $ex")
-        System.exit(0)
-      case e: AnalysisException => println(e)
+      case ex: Exception => println(ex)
+        System.exit(1)
+      // case e: AnalysisException => println(e)
     }
 
     try{
@@ -149,7 +148,7 @@ object ReconAutomationObject {
   def main(args: Array[String]): Unit = {
 
     // Reading the conf file
-    val config: Config = ConfigFactory.load("config.conf")
+    val config: Config = ConfigFactory.load("configBck.conf")
 
     // Reading the file format from config
     val readType: String = config.getString("readType")
