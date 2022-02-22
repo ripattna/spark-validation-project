@@ -61,7 +61,6 @@ class ReconAutomation {
       case e: AnalysisException => println(e)
       case ex: Exception => println(ex)
         System.exit(0)
-      // case e: AnalysisException => println(e)
     }
     try {
       sourceDF.agg(count("*").as(alias))
