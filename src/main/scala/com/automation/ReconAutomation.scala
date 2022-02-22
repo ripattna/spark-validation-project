@@ -60,7 +60,7 @@ class ReconAutomation {
     }
     catch {
       case ex: Exception => println(ex)
-        System.exit(1)
+        System.exit(0)
       // case e: AnalysisException => println(e)
     }
 
