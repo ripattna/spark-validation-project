@@ -52,23 +52,18 @@ class ReconAutomation {
   def calculateTotalRecordCount(sourceDF: DataFrame, targetDF: DataFrame, alias: String): DataFrame = {
     try {
       // Make sure that column name and column count are same
-      if (!sourceDF.columns.sameElements(targetDF.columns))
-      {
+      if (!sourceDF.columns.sameElements(targetDF.columns)) {
+        sourceDF
+          .agg(count("*").as(alias))
+          .withColumn("Column_Name", monotonically_increasing_id())
         throw new Exception("Column count or column name did not match!")
       }
+      else sourceDF
     }
     catch {
-      case e: AnalysisException => println(e)
       case ex: Exception => println(ex)
         System.exit(0)
-    }
-    try {
-      sourceDF.agg(count("*").as(alias))
-        .withColumn("Column_Name", monotonically_increasing_id())
-    }
-    catch {
-      case ex: Exception => sourceDF.agg(count("*").as(alias))
-        .withColumn("Column_Name", monotonically_increasing_id())
+        sourceDF
     }
   }
 
