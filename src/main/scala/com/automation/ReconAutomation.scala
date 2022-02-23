@@ -58,7 +58,7 @@ class ReconAutomation {
       }
     }
     catch {
-      case ex: Exception => println(s"Found a unknown exception: $ex")
+      case ex: Exception => println(ex)
         System.exit(0)
       case e: AnalysisException => println(e)
     }
