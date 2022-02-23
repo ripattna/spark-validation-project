@@ -68,7 +68,6 @@ class ReconAutomation {
     }
   }
 
-
   /**
    * Will join source and target dataframe inorder to get the extra records in source and target
    * @param joinType type of the join(left_anti)
