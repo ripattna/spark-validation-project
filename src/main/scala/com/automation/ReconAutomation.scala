@@ -52,22 +52,22 @@ class ReconAutomation {
   def calculateTotalRecordCount(sourceDF: DataFrame, targetDF: DataFrame, alias: String): DataFrame = {
     try {
       // Make sure that column name and column count are same
-      if (!sourceDF.columns.sameElements(targetDF.columns))
-      {
-        sourceDF
-          .agg(count("*").as(alias))
-          .withColumn("Column_Name", monotonically_increasing_id())
-
-        throw new Exception("Column count or column name did not match in source and target!!")
+      if (!sourceDF.columns.sameElements(targetDF.columns)) {
+        println("Column names and count were different in source and target!")
+        throw new Exception("Column count or column name didn't match!")
       }
-      else sourceDF
     }
     catch {
-      case ex: Exception => println(ex)
+      case ex: Exception => println(s"Found a unknown exception: $ex")
         System.exit(0)
-        sourceDF
+      case e: AnalysisException => println(e)
+    }
+    try {
+      sourceDF.agg(count("*").as(alias))
+        .withColumn("Column_Name", monotonically_increasing_id())
     }
   }
+
 
   /**
    * Will join source and target dataframe inorder to get the extra records in source and target
@@ -147,7 +147,7 @@ object ReconAutomationObject {
   def main(args: Array[String]): Unit = {
 
     // Reading the conf file
-    val config: Config = ConfigFactory.load("configBck.conf")
+    val config: Config = ConfigFactory.load("config.conf")
 
     // Reading the file format from config
     val readType: String = config.getString("readType")
@@ -201,7 +201,9 @@ object ReconAutomationObject {
     val columnToSelect = schemaSchemaList diff primaryKeyList
 
     val sourceRecCount = new ReconAutomation().calculateTotalRecordCount(sourceDF,targetDF, "Source_Rec_Count")
+    // sourceRecCount.show()
     val targetRecCount = new ReconAutomation().calculateTotalRecordCount(targetDF,sourceDF, "Target_Rec_Count")
+    // targetRecCount.show()
 
     // Overlap Record
     val overlapRecCount = new ReconAutomation()
