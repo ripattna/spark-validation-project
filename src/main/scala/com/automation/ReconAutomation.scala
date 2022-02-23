@@ -201,9 +201,7 @@ object ReconAutomationObject {
     val columnToSelect = schemaSchemaList diff primaryKeyList
 
     val sourceRecCount = new ReconAutomation().calculateTotalRecordCount(sourceDF,targetDF, "Source_Rec_Count")
-    // sourceRecCount.show()
     val targetRecCount = new ReconAutomation().calculateTotalRecordCount(targetDF,sourceDF, "Target_Rec_Count")
-    // targetRecCount.show()
 
     // Overlap Record
     val overlapRecCount = new ReconAutomation()
