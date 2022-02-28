@@ -5,7 +5,6 @@ import org.apache.spark.sql.functions.{col, collect_list, concat_ws, count, mono
 import org.apache.spark.sql.{AnalysisException, DataFrame, SparkSession}
 import scala.collection.convert.ImplicitConversions.`collection AsScalaIterable`
 
-
 class ReconAutomation {
 
   // Spark Session
