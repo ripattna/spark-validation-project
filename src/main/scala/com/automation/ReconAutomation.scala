@@ -280,6 +280,5 @@ object ReconAutomationObject {
       .option("header", true)
       .mode("overwrite")
       .save("/tmp/reconOutput")
-
   }
 }
