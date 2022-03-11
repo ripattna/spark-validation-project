@@ -2,7 +2,7 @@ package com.automation
 
 import com.typesafe.config.{Config, ConfigFactory}
 import org.apache.spark.sql.functions.{col, collect_list, concat_ws, count, monotonically_increasing_id}
-import org.apache.spark.sql.{ DataFrame, SparkSession}
+import org.apache.spark.sql.{DataFrame, SparkSession}
 import scala.collection.convert.ImplicitConversions.`collection AsScalaIterable`
 
 class ReconAutomation {
