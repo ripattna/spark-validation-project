@@ -274,7 +274,7 @@ object ReconAutomationObject {
       .join(extraTargetRowsCount, Seq("Column_Name"),"inner")
     finalDF.show()
 
-    // Write DataFrame data to CSV file.
+    // Write DataFrame data to CSV file
     finalDF.write
       .format("csv")
       .option("header", true)
